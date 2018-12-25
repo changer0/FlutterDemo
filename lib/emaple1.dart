@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 /// 一个按钮 点击弹窗
+/// 仅用作示例
 class RollingButton extends StatefulWidget {
   // StatefulWidget 需要实现这个方法，返回一个 State
   @override
