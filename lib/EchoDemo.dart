@@ -77,11 +77,12 @@ class _MessageListState extends State<MessageList> {
         itemBuilder: (context, index) {
           final msg = messages[index];
           final subtitle =  DateTime.fromMillisecondsSinceEpoch(msg.timestamp)
-              .toLocal().toIso8601String();;
+              .toLocal().toIso8601String();
           return ListTile(
             title: Text(msg.msg),
             subtitle: Text(subtitle),
           );
+
         },
     );
 
@@ -148,15 +149,17 @@ class MessageListScreen extends StatelessWidget {
         ),
         body: MessageList(key: messageListKey),
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            final result = await Navigator.push(
+          onPressed: ()  {
+            Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => AddMessageScreen())
-            );
-            debugPrint('result = $result');
-            if (result is Message) {
-              messageListKey.currentState.addMessage(result);
-            }
+            ).then((result) {
+              debugPrint('result = $result');
+              if (result is Message) {
+                messageListKey.currentState.addMessage(result);
+              }
+            });
+
           },
           tooltip: 'Add message',
           child: Icon(Icons.add),
